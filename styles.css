@@ -133,7 +133,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 }
 
 
-#user-input {
+.user-input {
     /* display:block; */
     width:100%;
     font-family: monospace;
@@ -178,12 +178,12 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     }
 } */
 
-#user-input::placeholder{
+.user-input::placeholder{
     color: var(--text);
     opacity:50%;
 }
 
-#user-input:active, #user-input:focus{
+.user-input:active, .user-input:focus{
     background-color: transparent;
     border:none;
     outline: none;

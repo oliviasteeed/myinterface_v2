@@ -4,19 +4,88 @@
 //FUNCTIONS//
 
 //update span counter
-function updateCounter(newCount) {
+async function updateCounter(newCount) {
     chrome.storage.local.set({ "spanCounter": newCount }, () => {
         console.log(`Counter updated to: ${newCount}`);
     });
 }
 
 //get span counter from local storage
-function getCounter() {
+async function getCounter() {
     return new Promise((resolve) => {
         chrome.storage.local.get("spanCounter", (result) => {
             resolve(result.spanCounter || 0); // Default to 0 if no counter is found
         });
     });
+}
+
+async function setFocusEnd(userInput) {
+    const length = userInput.textContent.length;
+    userInput.focus();
+    console.log("span length", length);
+
+    // Create a range and set the selection to the end
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    // Set range to the end of the text in the span
+    range.setStart(userInput.firstChild || userInput, length); // Focus at the end of the text
+    range.setEnd(userInput.firstChild || userInput, length);
+
+    // Clear any existing selections and apply the new range
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    console.log("Setting focus on the end of the span");
+}
+
+// Listener for when the user hits enter
+async function handleEnterKeyPress(shadowRoot) {
+    // Get the current counter (await because it's asynchronous)
+    const currentCount = await getCounter();
+    console.log("handle enter key count: ",currentCount);
+
+    // Find the user input element with the dynamically generated ID
+    const userInput = shadowRoot.getElementById(`input-${currentCount}`);
+
+    //set focus to end (it works!!!! :D)
+    userInput.textContent = userInput.textContent.trim();
+    setFocusEnd(userInput);  
+
+    if (userInput) {
+
+        userInput.addEventListener("keydown", async (event) => {
+            if (event.key === "Enter") {
+                console.log("Enter key pressed");
+
+                const userPrompt = userInput.textContent.trim();
+
+                if (userPrompt.length > 0) {
+                    // increment id count
+                    const newCount = currentCount + 1;
+                    updateCounter(newCount);
+                    console.log("new count:", newCount);
+
+                    // Log the prompt to be sent (e.g., to an LLM)
+                    console.log("Prompt to be sent to LLM: ", userPrompt);
+                    //function to deal with this here
+
+                    // Add a new span after the current one
+                    const container = shadowRoot.getElementById("popup-input-box");
+                    container.innerHTML += `<p><span id="input-${newCount}" class="user-input" role="textbox" contenteditable>I want to change...</span></p>`;
+
+
+                    // Set the focus to the newly created span
+                    const newInput = shadowRoot.getElementById(`input-${newCount}`);
+                    setFocusEnd(newInput);  
+
+                    handleEnterKeyPress(shadowRoot);  // Re-apply the event listener to the new span
+                }
+            }
+        });
+    } else {
+        console.error(`Element with id 'input-${currentCount}' not found.`);
+    }
 }
 
 
@@ -59,35 +128,91 @@ if (!document.getElementById("popup-container")) {
                 shadowHost.remove();
             });
 
-            //update counter to 1 - one span has been created 
-            updateCounter(1);
+            // add popup functions //
 
-            const placeholder = shadowRoot.getElementById("user-input");
+            //initialize counter
+            updateCounter(0);
 
-            function setFocusEnd(placeholder){
-            // Set text focus at end of placeholder text
-            const length = placeholder.textContent.length;
-            placeholder.focus();
+            setFocusEnd(shadowRoot.getElementById("input-0"));    //set focus to end of text span
 
-            // Create a range and set the selection to the end
-            const range = document.createRange();
-            const selection = window.getSelection();
-            range.setStart(placeholder.firstChild || placeholder, length);
-            range.setEnd(placeholder.firstChild || placeholder, length);
+            //custom caret here ONLY IF I HAVE TIME :,(
 
-            // Clear any existing selections and apply the new range
-            selection.removeAllRanges();
-            selection.addRange(range);
-            console.log("setting focus on textarea");
-            }
+            handleEnterKeyPress(shadowRoot);    //event listener to make new span when enter key is pressed
 
-            setFocusEnd(placeholder);
+
+            //last thing in block
+            console.log("Popup successfully injected.");
+        })
+        .catch(error => {
+            console.error("Error injecting HTML:", error);
+        });
+} else {
+    console.log("Popup already exists.");
+}
 
 
 
 
 
-            //custom caret ONLY IF I HAVE TIME
+
+
+
+
+
+
+
+
+// async function setFocusEnd(userInput){
+//     const length = userInput.textContent.length;
+//     userInput.focus();
+//     console.log("span length", length);
+
+//     // Create a range and set the selection to the end
+//     const range = document.createRange();
+//     const selection = window.getSelection();
+
+//     if (!userInput.secondChild){
+//         range.setStart(userInput.firstChild || userInput, length);
+//         range.setEnd(userInput.firstChild || userInput, length);
+//         console.log("first one");
+//     }else{
+//         range.setStart(userInput.secondChild || userInput, length);
+//         range.setEnd(userInput.secondChild || userInput, length);
+//         console.log("second one");
+//     }
+    
+
+//     // Clear any existing selections and apply the new range
+//     selection.removeAllRanges();
+//     selection.addRange(range);
+//     console.log("setting focus on end of span");
+//     }
+
+
+
+
+
+
+
+// //collect user input
+// // Get reference to the input field
+// const userInput = document.getElementById("user-input");
+
+// // Initialize a variable to store the input value
+// let userText = '';
+
+// // Add event listener to detect when the Enter key is pressed
+// userInput.addEventListener('keypress', (event) => {
+//     if (event.key === 'Enter') {  // Check if the Enter key was pressed
+//         userText = userInput.value;  // Save the input value
+//         console.log("User input saved:", userText);  // You can log it for debugging or use the value
+//         userInput.blur();  // Optionally remove focus from the input field after saving
+//     }
+// });
+
+
+
+
             // function updateCursorPosition() {
             //     const placeholder = shadowRoot.getElementById("user-input");
             
@@ -119,79 +244,3 @@ if (!document.getElementById("popup-container")) {
             // // Update the cursor position whenever the user types or focuses
             // placeholder.addEventListener("input", updateCursorPosition);
             // placeholder.addEventListener("focus", updateCursorPosition);
-
-
-
-
-
-            //listener for when user hits return
-            const userInput = shadowRoot.getElementById("user-input");
-
-            userInput.addEventListener("keydown", (event) => {
-                if (event.key === "Enter") {
-                    console.log("enter key pressed");
-                    console.log(userInput.textContent); //this is where i will get the prompt from
-
-                    const userPrompt = userInput.textContent.trim();
-
-                    if (userPrompt.length > 0){
-                        spanCount = getCounter();
-
-                        //increment prompt counter
-
-                        //(insert here)
-
-                        //send call to LLM to do prompt and inject code
-                        console.log("Prompt to be sent to LLM", userPrompt)
-
-                        // add new span to write the next prompt
-                        var id = "user-input"+spanCount;
-                        container.insertAdjacentHTML('afterend', '<p><span id="user-input" role="textbox" contenteditable>I want to change...</span></p>');
-                    }
-
-                    
-
-                    //make new span after current one
-                    const newInput = document.createElement("span");
-                    newInput.setAttribute("role", "textbox");
-                    newInput.setAttribute("contenteditable", "true");
-                    newInput.setAttribute("id", "user-input");
-                    newInput.textContent = "I want to change..."; // Empty the text for new input
-                    
-                    userInput.parentNode.appendChild(newInput);
-                    setFocusEnd(newInput);
-                }
-            });
-
-
-            console.log("Popup successfully injected.");
-        })
-        .catch(error => {
-            console.error("Error injecting HTML:", error);
-        });
-} else {
-    console.log("Popup already exists.");
-}
-
-
-
-
-
-
-// //collect user input
-// // Get reference to the input field
-// const userInput = document.getElementById("user-input");
-
-// // Initialize a variable to store the input value
-// let userText = '';
-
-// // Add event listener to detect when the Enter key is pressed
-// userInput.addEventListener('keypress', (event) => {
-//     if (event.key === 'Enter') {  // Check if the Enter key was pressed
-//         userText = userInput.value;  // Save the input value
-//         console.log("User input saved:", userText);  // You can log it for debugging or use the value
-//         userInput.blur();  // Optionally remove focus from the input field after saving
-//     }
-// });
-
-
