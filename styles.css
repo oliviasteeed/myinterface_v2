@@ -1,0 +1,86 @@
+
+* {
+    all: unset; /* Reset all styles to prevent external styles from interfering */
+    box-sizing: border-box;
+}
+
+
+#popup-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 20rem;
+    background: #0A0094;
+    padding: 1rem;
+    z-index: 9999;
+    color: #ffffff;
+
+    
+
+    /* Stroke effect */
+    outline: 3px solid #44F497;
+    filter: drop-shadow(2px 2px 0px #44F497) 
+            drop-shadow(-2px -2px 0px #44F497)
+            drop-shadow(-2px 2px 0px #44F497)
+            drop-shadow(2px -2px 0px #44F497);
+
+}
+
+.popup-shadow{
+box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+} 
+
+.popup-header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    margin-bottom: 2rem;
+    /* border: 1px solid orange; */
+}
+
+.popup-header-text-box{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    /* border: 1px solid green; */
+}
+
+.popup-title-text{
+    font-family: monospace;
+    color: #44F497;
+    font-weight:800;
+    font-style:bold;
+    font-size: 1rem;
+    padding:0;
+    margin:0;
+}
+
+.popup-body-text{
+    font-family: monospace;
+    color: #44F497;
+    font-weight:300;
+    font-size: 1rem;
+    padding:0;
+    margin:0;
+}
+
+.popup-input-text{
+    font-family: monospace;
+    color: #44F497;
+    font-weight:300;
+    font-size: 1rem;
+    padding:0;
+    margin:0;
+}
+
+#close-popup {
+    font-family: monospace;
+    color: #44F497;
+    background: none;
+    border: none;
+    margin:0;
+    padding:0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    /* border: 1px solid red; */
+}
