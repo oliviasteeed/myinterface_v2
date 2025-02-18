@@ -17,13 +17,17 @@
 
 #popup-container {
     position: fixed;
-    top: 1rem;
-    right: 1rem;
-    width: 20rem;
+    top: 16px;
+    right: 16px;
+    width: 300px;
     background: var(--background);
-    padding: 1rem;
+    padding: 16px 16px 5px 16px;
+    margin:0;
     z-index: 9999;
+
     color: #ffffff;
+        letter-spacing: -0.5px;
+    line-height: 120%;
 
     /* Stroke effect */
     outline: 3px solid var(--stroke);
@@ -51,7 +55,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: space-between;
     align-items: flex-start; 
-    margin-bottom: 2rem;
+    margin-bottom: 32px;
     /* border: 1px solid orange; */
 }
 
@@ -67,7 +71,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     color: var(--text);
     font-weight:800;
     font-style:bold;
-    font-size: 1rem;
+    font-size: 16px;
     padding:0;
     margin:0;
 }
@@ -76,7 +80,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     font-family: monospace;
     color: var(--text);
     font-weight:300;
-    font-size: 1rem;
+    font-size: 16px;
     padding:0;
     margin:0;
 }
@@ -85,7 +89,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     font-family: monospace;
     color: var(--text);
     font-weight:300;
-    font-size: 1rem;
+    font-size: 16px;
     padding:0;
     margin:0;
 }
@@ -97,23 +101,43 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     border: none;
     margin:0;
     padding:0;
-    font-size: 1rem;
+    font-size: 16px;
     cursor: pointer;
+    /* border: 1px red solid; */
 }
 
 .close-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 20px; 
+    height: 20px; 
+    padding:5px;
+    /* border: 1px orange solid; */
     /* object-fit: contain; 
     background: transparent;  
     border: none;   */
 }
 
+.popup-footer{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:48px;
+}
+
+.popup-footer-text{
+    font-family: monospace;
+    color: var(--text);
+    font-weight:300;
+    font-size: 8px;
+    padding:0;
+    margin:0;
+}
 
 
 #user-input {
+    /* display:block; */
     width:100%;
     font-family: monospace;
+    font-size: 16px;
     color: var(--text);
     background-color: transparent;
     border:none;
@@ -123,7 +147,36 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     overflow: hidden;  
     word-wrap: break-word;
     white-space: pre-wrap; 
+/* 
+    caret-color: transparent;
+    position:relative; */
 }
+
+/* custom caret ONLY IF I HAVE TIME!!!restraint */
+/* #user-input::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px; 
+    height: 16px; 
+    background-color: var(--text); 
+    animation: blink 1s infinite step-end; 
+} */
+
+/* .custom-caret {
+    position: absolute;
+    width: 1em;
+    height: 1.2em;
+    background-color: var(--text);  
+    animation: blink 1s infinite step-end;  
+}
+
+@keyframes blink {
+    50% {
+        background-color: transparent;
+    }
+} */
 
 #user-input::placeholder{
     color: var(--text);

@@ -1,40 +1,21 @@
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyInterface</title>
-</head>
-<body>
-    <div class="popup-header-box">
-        <div class="popup-header-text-box">
-          <h1 class="popup-title-text">take back your experience,</h1>
-            <p class="popup-body-text">it's <em>*your*</em> interface.</p>  
-        </div>
-        <button id="close-popup">&times;</button>
+<div class="popup-header-box">
+    <div class="popup-header-text-box">
+        <h1 class="popup-title-text">take back your experience,</h1>
+        <h2 class="popup-body-text">it's <span class="emphasis">*your*</span> interface.</h2>
     </div>
+    <button id="close-popup">
+        <img src="chrome-extension://npjocblgpidcaapgnkoehefhpnehdfef/img/closeicon.png" alt="Close window"
+            class="close-icon">
+    </button>
+</div>
 
-    <p class="popup-input-text">I want to change</p>
+<!-- <p class="popup-input-text">I want to change</p> -->
 
+<!-- automatically line break when get to end of popup -->
+<!-- <textarea id="user-input" placeholder="I want to change..."></textarea> -->
 
-</body>
-</html>  -->
+<p><span id="input-0" class="user-input" role="textbox" contenteditable>I want to change...</span></p>
 
-    <div class="popup-header-box">
-        <div class="popup-header-text-box">
-          <h1 class="popup-title-text">take back your experience,</h1>
-            <p class="popup-body-text">it's <span class="emphasis">*your*</span> interface.</p>  
-        </div>
-        <!-- <button id="close-popup">&times;</button> -->
-        <button id="close-popup">
-            <img src="closeicon2.png" alt="Close" class="close-icon">
-        </button>
-    </div>
-
-    <!-- <p class="popup-input-text">I want to change</p> -->
-
-    <!-- automatically line break when get to end of popup -->
-    <textarea id="user-input" placeholder="I want to change..."></textarea>
-
-    <!-- <button id="save-input">Save Input</button> -->
+<div class="popup-footer">
+    <p class="popup-footer-text">Press enter to submit prompt.</p>
+</div>
