@@ -8,10 +8,11 @@
     --stroke: #0A0094; */
   }
 
-* {
-    all: unset; /* Reset all styles to prevent external styles from interfering */
+/* this causes issues */
+/* {
+    all: unset; 
     box-sizing: border-box;
-}
+} */
 
 
 #popup-container {
@@ -42,7 +43,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 /* not sure if I like *your* or your underline better? */
 .emphasis{
     font-style:italic;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 
@@ -89,23 +90,23 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     margin:0;
 }
 
-/* #close-popup {
+#close-popup {
     font-family: monospace;
     color: var(--text);
     background: none;
     border: none;
     margin:0;
     padding:0;
-    font-size: 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
-} */
+}
 
 .close-icon {
     width: 1.5rem;
     height: 1.5rem;
-    object-fit: contain; 
+    /* object-fit: contain; 
     background: transparent;  
-    border: none;  
+    border: none;   */
 }
 
 
@@ -114,6 +115,8 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     width:100%;
     font-family: monospace;
     color: var(--text);
+    background-color: transparent;
+    border:none;
     margin:0;
     padding:0;
     resize: none;      
@@ -122,3 +125,13 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     white-space: pre-wrap; 
 }
 
+#user-input::placeholder{
+    color: var(--text);
+    opacity:50%;
+}
+
+#user-input:active, #user-input:focus{
+    background-color: transparent;
+    border:none;
+    outline: none;
+}
