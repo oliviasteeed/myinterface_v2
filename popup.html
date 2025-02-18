@@ -24,9 +24,14 @@
     <div class="popup-header-box">
         <div class="popup-header-text-box">
           <h1 class="popup-title-text">take back your experience,</h1>
-            <p class="popup-body-text">it's <em>*your*</em> interface.</p>  
+            <p class="popup-body-text">it's <span class="italic">*your*</span> interface.</p>  
         </div>
         <button id="close-popup">&times;</button>
     </div>
 
-    <p class="popup-input-text">I want to change</p>
+    <!-- <p class="popup-input-text">I want to change</p> -->
+
+    <!-- automatically line break when get to end of popup -->
+    <textarea id="user-input" placeholder="I want to change..."></textarea>
+
+    <button id="save-input">Save Input</button>

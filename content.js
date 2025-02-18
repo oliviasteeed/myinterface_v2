@@ -79,3 +79,21 @@ if (!document.getElementById("popup-container")) {
     console.log("Popup already exists.");
 }
 
+
+//collect user input
+// Get reference to the input field
+const userInput = document.getElementById("user-input");
+
+// Initialize a variable to store the input value
+let userText = '';
+
+// Add event listener to detect when the Enter key is pressed
+userInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {  // Check if the Enter key was pressed
+        userText = userInput.value;  // Save the input value
+        console.log("User input saved:", userText);  // You can log it for debugging or use the value
+        userInput.blur();  // Optionally remove focus from the input field after saving
+    }
+});
+
+

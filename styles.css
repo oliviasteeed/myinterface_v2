@@ -1,3 +1,12 @@
+:root {
+    --background: #0A0094;
+    --text: #44F497;
+    --stroke: #44F497;
+
+    /* --background: #DEE0E2;
+    --text: #0A0094;
+    --stroke: #0A0094; */
+  }
 
 * {
     all: unset; /* Reset all styles to prevent external styles from interfering */
@@ -10,25 +19,30 @@
     top: 1rem;
     right: 1rem;
     width: 20rem;
-    background: #0A0094;
+    background: var(--background);
     padding: 1rem;
     z-index: 9999;
     color: #ffffff;
 
-    
-
     /* Stroke effect */
-    outline: 3px solid #44F497;
-    filter: drop-shadow(2px 2px 0px #44F497) 
-            drop-shadow(-2px -2px 0px #44F497)
-            drop-shadow(-2px 2px 0px #44F497)
-            drop-shadow(2px -2px 0px #44F497);
+    outline: 3px solid var(--stroke);
+    filter: drop-shadow(2px 2px 0px var(--stroke)) 
+            drop-shadow(-2px -2px 0px var(--stroke))
+            drop-shadow(-2px 2px 0px var(--stroke))
+            drop-shadow(2px -2px 0px var(--stroke));
 
+    transition: height 0.3s ease;  /* Smooth transition for resizing */
 }
 
+/* does this need to be own class???? */
 .popup-shadow{
 box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 } 
+
+.italic{
+    font-style:italic;
+}
+
 
 .popup-header-box {
     display: flex;
@@ -47,7 +61,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 
 .popup-title-text{
     font-family: monospace;
-    color: #44F497;
+    color: var(--text);
     font-weight:800;
     font-style:bold;
     font-size: 1rem;
@@ -57,7 +71,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 
 .popup-body-text{
     font-family: monospace;
-    color: #44F497;
+    color: var(--text);
     font-weight:300;
     font-size: 1rem;
     padding:0;
@@ -66,7 +80,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 
 .popup-input-text{
     font-family: monospace;
-    color: #44F497;
+    color: var(--text);
     font-weight:300;
     font-size: 1rem;
     padding:0;
@@ -75,7 +89,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 
 #close-popup {
     font-family: monospace;
-    color: #44F497;
+    color: var(--text);
     background: none;
     border: none;
     margin:0;
@@ -84,3 +98,16 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     /* border: 1px solid red; */
 }
+
+#user-input {
+    width:100%;
+    font-family: monospace;
+    color: var(--text);
+    margin:0;
+    padding:0;
+    resize: none;      
+    overflow: hidden;  
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+}
+
