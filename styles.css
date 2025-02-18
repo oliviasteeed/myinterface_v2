@@ -39,8 +39,10 @@
 box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 } 
 
-.italic{
+/* not sure if I like *your* or your underline better? */
+.emphasis{
     font-style:italic;
+    text-decoration: underline;
 }
 
 
@@ -87,7 +89,7 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     margin:0;
 }
 
-#close-popup {
+/* #close-popup {
     font-family: monospace;
     color: var(--text);
     background: none;
@@ -96,8 +98,17 @@ box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
     padding:0;
     font-size: 1.5rem;
     cursor: pointer;
-    /* border: 1px solid red; */
+} */
+
+.close-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain; 
+    background: transparent;  
+    border: none;  
 }
+
+
 
 #user-input {
     width:100%;
